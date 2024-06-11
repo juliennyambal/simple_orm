@@ -1,4 +1,3 @@
-
 from sqlalchemy.orm import declarative_base, mapped_column, Mapped, relationship
 from sqlalchemy import Integer, String, ForeignKey
 from env_variables import USER_TABLE_NAME, COMMENT_TABLE_NAME, PROFILE_TABLE_NAME

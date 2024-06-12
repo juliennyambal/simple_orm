@@ -1,3 +1,6 @@
+# Should be run independently
+# python form.py
+
 from tkinter import *
 from models import User, Comment, Profile
 from orm_engine import session

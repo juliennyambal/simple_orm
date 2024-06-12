@@ -2,28 +2,6 @@ from sqlalchemy import select
 from models import User, Comment, Profile
 from orm_engine import session
 
-# # 1 - Uncomment this for the bulk insert, just to show how to insert many
-# try:
-#     for user_name in ["Sian", "Ron", "Anri", "Zara"]:
-#         comment_text = f"This is a comment for {user_name}"  
-#         profile_text = f"This is a profile for {user_name}" 
-#         comment = Comment(comment=comment_text)
-#         profile = Profile(profile=profile_text)
-#         user = User(name=user_name, age=17+user_name.count("a"), profile=profile, comment=comment)
-#         session.add(user)
-#         session.commit()
-# except:
-#     session.rollback()
-#     raise
-# else:
-#     session.commit()
-
-
-# statement = session.execute(select(User)).all()
-# for user in statement:
-#     print(f"Name: {user[0].name} - Age: {user[0].age} - Comment: {user[0].comment} - Profile: {user[0].profile}")
-
-
 while True:
     # Get user information
     user_name = input("Enter your name (or 'q' to quit): ")
@@ -56,3 +34,11 @@ while True:
         raise
     else:
         session.commit()
+
+
+# # Print data
+# statment_select = select(User)
+# statement = session.scalars(statment_select).all()
+# for user in statement:
+#     print(f"Name: {user.name} - Age: {user.age} - Comment: {user.comment} - Profile: {user.profile}")
+# session.commit()

@@ -2,8 +2,17 @@ from tkinter import *
 from models import User, Comment, Profile
 from orm_engine import session
 
-def calculate_sum():
-  # Get values from entry fields
+# Create the main window
+window = Tk()
+window.title("LinkedOut")
+
+def clear():
+    [widget.delete(0, END) for widget in window.winfo_children() if isinstance(widget, Entry)]
+
+
+def save_entry():
+  """get entry from the user and store them in the database
+  """
   try:
 
     # Create Comment, Profile, and User objects
@@ -12,7 +21,6 @@ def calculate_sum():
     age = int(age_entry.get())
     name = name_entry.get()
     user = User(name=name, age=age, profile=profile, comment=comment)
-    
     session.add(user)
     session.commit()
   except:
@@ -20,23 +28,22 @@ def calculate_sum():
       raise
   else:
       session.commit()
+  # Clears the screen
+  clear()
 
-# Create the main window
-window = Tk()
-window.title("Addition Calculator")
 
 # Create labels for input fields
-label1 = Label(window, text="Name:")
-label1.grid(row=0, column=0)
+name_field = Label(window, text="Name:")
+name_field.grid(row=0, column=0)
 
-label2 = Label(window, text="Age:")
-label2.grid(row=1, column=0)
+age_field = Label(window, text="Age:")
+age_field.grid(row=1, column=0)
 
-label2 = Label(window, text="Job Title:")
-label2.grid(row=2, column=0)
+profile_field = Label(window, text="Job Title:")
+profile_field.grid(row=2, column=0)
 
-label2 = Label(window, text="LinkOut Comment:")
-label2.grid(row=3, column=0)
+comment_filed = Label(window, text="LinkOut Comment:")
+comment_filed.grid(row=3, column=0)
 
 # Create entry fields for user input
 name_entry = Entry(window)
@@ -51,8 +58,8 @@ job_title_entry.grid(row=2, column=1)
 comment_entry = Entry(window)
 comment_entry.grid(row=3, column=1)
 
-# Create a button to trigger calculation
-button = Button(window, text="Save", command=calculate_sum)
+# Create a button to trigger storing 
+button = Button(window, text="Save", command=save_entry)
 button.grid(row=4, columnspan=2)
 
 # Run the main loop

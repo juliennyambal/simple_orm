@@ -277,8 +277,8 @@ print(alice)
 To update an existing user's information:
 
 ```python
-alice = session.execute(select(User).where(User.name=="Alice")).scalar_one()
-alice.age = 80
+statement_update = update(User).values({"age": "70"}).where(User.name=="Nick")
+session.execute(statement_update)
 session.commit()
 ```
 
@@ -287,7 +287,10 @@ session.commit()
 To delete a user from the database:
 
 ```python
-session.delete(alice)
+from sqlalchemy import delete
+# delete row
+statement_delete = delete(User).where(User.name == 'Maxim')
+session.execute(stmt)
 session.commit()
 ```
 

@@ -1,7 +1,7 @@
 # Start with this  
 
 from sqlalchemy.orm import declarative_base, mapped_column, Mapped, relationship
-from sqlalchemy import Integer, String, ForeignKey, select
+from sqlalchemy import Integer, String, ForeignKey, select, delete, update, insert
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 from models import Base
@@ -45,21 +45,25 @@ class Comment(Base):
     
 Base.metadata.create_all(engine)
     
-# # 1 - Uncomment this for the bulk insert, just to show how to insert many
-# try:
-#     for user_name in ["Sian", "Ron", "Anri", "Zara"]:
-#         comment_text = f"This is a comment for {user_name}"  
-#         profile_text = f"This is a profile for {user_name}" 
-#         comment = Comment(comment=comment_text)
-#         profile = Profile(profile=profile_text)
-#         user = User(name=user_name, age=17+user_name.count("a"), profile=profile, comment=comment)
-#         session.add(user)
-#         session.commit()
-# except:
-#     session.rollback()
-#     raise
-# else:
-#     session.commit()
+# 1 - Uncomment this for the bulk insert, just to show how to insert many
+try:
+    for user_name in ["Sian", "Ron", "Anri", "Zara"]:
+        comment_text = f"This is a comment for {user_name}"  
+        profile_text = f"This is a profile for {user_name}" 
+        comment = Comment(comment=comment_text)
+        profile = Profile(profile=profile_text)
+        user = User(name=user_name, age=17+user_name.count("a"), profile=profile, comment=comment)
+        session.add(user)
+        session.commit()
+except:
+    session.rollback()
+    raise
+else:
+    session.commit()
+
+
+# Think about making modules from here
+
 
 # # 2 - Extend the above to this 
 # while True:
@@ -95,17 +99,19 @@ Base.metadata.create_all(engine)
 #     else:
 #         session.commit()
 
-# 3 - Print data
-statement = session.execute(select(User)).all()
-for user in statement:
-    print(f"Name: {user[0].name} - Age: {user[0].age} - Comment: {user[0].comment} - Profile: {user[0].profile}")
+# # 3 - Print data
+# statment_select = select(User)
+# statement = session.scalars(statment_select).all()
+# for user in statement:
+#     print(f"Name: {user.name} - Age: {user.age} - Comment: {user.comment} - Profile: {user.profile}")
+# session.commit()
 
-# update row
-alice = session.execute(select(User).where(User.name=="Alice")).scalar_one()
-alice.age = 80
-session.commit()
+# # Update row
+# statement_update = update(User).values({"age": "70"}).where(User.name=="Nick")
+# session.execute(statement_update)
+# session.commit()
 
-# delete row
-alice = session.execute(select(User).where(User.name=="Alice")).scalar_one()
-session.delete(alice)
-session.commit()
+# # delete row
+# statement_delete = (delete(User).where(User.name == 'Anri'))
+# session.execute(statement_delete)
+# session.commit()

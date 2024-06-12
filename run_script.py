@@ -1,3 +1,6 @@
+# Should be run independently
+# python run_script.py
+
 from sqlalchemy import select
 from models import User, Comment, Profile
 from orm_engine import session

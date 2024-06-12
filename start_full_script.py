@@ -1,4 +1,5 @@
-# Start with this  
+# Should be run independently
+# python start_full_script.py
 
 from sqlalchemy.orm import declarative_base, mapped_column, Mapped, relationship
 from sqlalchemy import Integer, String, ForeignKey, select, delete, update, insert

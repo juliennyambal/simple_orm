@@ -104,6 +104,12 @@ Base = declarative_base()
 
 Define your database models by creating classes that inherit from the `Base` class. Each class represents a table in your database.
 
+### Entity Relationship Diagram of the exercise: One to One: 
+
+Check the One-to-One relationship : [SQLAlchemy One-to-One](https://docs.sqlalchemy.org/en/20/orm/basic_relationships.html#one-to-one)
+
+![image](images/ERD.png)
+
 ```python
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 from sqlalchemy import Integer, String
@@ -206,7 +212,6 @@ The `Profile` class defines the structure for storing user profile information i
     - `user: Mapped['User'] = relationship("User", back_populates="profile")`: This defines a bidirectional relationship with the `User` model.
         - `Mapped['User']`: The `user` attribute will hold a reference to a `User` object.
         - `relationship("User", back_populates="profile")`: Establishes a connection between `Profile` and `User`. When accessing a user's `profile` attribute, you'll retrieve their profile information. Conversely, the `User` model likely has a `profile` attribute referencing the associated profile (using `back_populates="profile"`).
-
 
 **Comment Model:**
 

@@ -7,7 +7,7 @@ while True:
     user_name = input("Enter your name (or 'q' to quit): ")
     comment_text = input("Enter your linkedout comment (or 'q' to quit): ")
     profile_text = input("What's your current job ? (or 'q' to quit): ")
-    age = int(input("How old are you ? (or 'q' to quit): "))
+    age = int(input("How old are you ? (or '0' to quit): "))
 
     # Check for quit option
     if user_name.lower() == 'q':
@@ -20,7 +20,7 @@ while True:
         user = User(name=user_name, age=age, profile=profile, comment=comment)
 
         # Print the created user data (replace with actual database interaction)
-        print(f"\nCreated User:")
+        print(f"Created User:")
         print(f"  Name: {user.name}")
         print(f"  Age: {user.age}")
         print(f"  Profile: {user.profile.profile}")
@@ -34,11 +34,3 @@ while True:
         raise
     else:
         session.commit()
-
-
-# # Print data
-# statment_select = select(User)
-# statement = session.scalars(statment_select).all()
-# for user in statement:
-#     print(f"Name: {user.name} - Age: {user.age} - Comment: {user.comment} - Profile: {user.profile}")
-# session.commit()

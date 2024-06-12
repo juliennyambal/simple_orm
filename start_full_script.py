@@ -81,12 +81,12 @@ while True:
     else:
         session.commit()
 
-# # Print data
-# statment_select = select(User)
-# statement = session.scalars(statment_select).all()
-# for user in statement:
-#     print(f"Name: {user.name} - Age: {user.age} - Comment: {user.comment} - Profile: {user.profile}")
-# session.commit()
+# Print data
+statment_select = select(User)
+statement = session.scalars(statment_select).all()
+for user in statement:
+    print(f"Name: {user.name} - Age: {user.age} - Comment: {user.comment} - Profile: {user.profile}")
+session.commit()
 
 # # Update row
 # statement_update = update(User).values({"age": "70"}).where(User.name=="Nick")

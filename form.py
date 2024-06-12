@@ -1,6 +1,6 @@
 from tkinter import *
 from models import User, Comment, Profile
-from sqla_engine import session
+from orm_engine import session
 
 def calculate_sum():
   # Get values from entry fields

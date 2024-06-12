@@ -96,8 +96,16 @@ Base.metadata.create_all(engine)
 #         session.commit()
 
 # 3 - Print data
-statement = session.execute(select(User).where(User.name=="Simon")).all()
+statement = session.execute(select(User)).all()
 for user in statement:
     print(f"Name: {user[0].name} - Age: {user[0].age} - Comment: {user[0].comment} - Profile: {user[0].profile}")
 
-    
+# update row
+alice = session.execute(select(User).where(User.name=="Alice")).scalar_one()
+alice.age = 80
+session.commit()
+
+# delete row
+alice = session.execute(select(User).where(User.name=="Alice")).scalar_one()
+session.delete(alice)
+session.commit()
